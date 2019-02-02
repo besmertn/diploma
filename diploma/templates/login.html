@@ -21,5 +21,10 @@
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
     </form>
+    <a href={{ url_for('oauth_authorize', provider='google') }}>
+        <div class="google_auth_button">
+            <img src="{{ url_for('static', filename='img/new-google-favicon.png') }}"/>
+        </div>
+    </a>
     <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
 {% endblock %}

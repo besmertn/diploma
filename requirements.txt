@@ -1,4 +1,4 @@
-pip uninstalalembic==1.0.7
+alembic==1.0.7
 asn1crypto==0.24.0
 blinker==1.4
 certifi==2018.11.29
@@ -6,7 +6,9 @@ cffi==1.11.5
 chardet==3.0.4
 Click==7.0
 cryptography==2.5
+dominate==2.3.5
 Flask==1.0.2
+Flask-Bootstrap==3.3.7.1
 Flask-Login==0.4.1
 Flask-Mail==0.9.1
 Flask-Migrate==2.3.1
@@ -27,5 +29,6 @@ requests==2.21.0
 six==1.12.0
 SQLAlchemy==1.2.17
 urllib3==1.24.1
+visitor==0.1.3
 Werkzeug==0.14.1
 WTForms==2.2.1

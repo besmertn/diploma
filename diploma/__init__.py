@@ -3,10 +3,11 @@ import os
 from logging.handlers import RotatingFileHandler
 
 from flask import Flask
+from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
+from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from flask_mail import Mail
 
 from config import Config
 
@@ -17,6 +18,7 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 mail = Mail(app)
+bootstrap = Bootstrap(app)
 
 if not app.debug:
     if not os.path.exists('logs'):
@@ -31,4 +33,3 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('Application startup')
 
-from diploma import routes, models, forms, emails, auth

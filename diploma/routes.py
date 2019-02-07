@@ -6,9 +6,9 @@ from werkzeug.urls import url_parse
 
 from diploma import app, db
 from diploma.auth import OAuthSignIn
+from diploma.emails import send_password_reset_email
 from diploma.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm
 from diploma.models import User
-from diploma.emails import send_password_reset_email
 
 
 @app.route('/favicon.ico')
@@ -31,7 +31,10 @@ def login():
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        if '@' in form.username.data:
+            user = User.query.filter_by(email=form.username.data).first()
+        else:
+            user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))

@@ -1,6 +1,6 @@
 from time import time
-import jwt
 
+import jwt
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -20,6 +20,8 @@ class User(UserMixin, db.Model):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
+        if not self.password_hash:
+            return None
         return check_password_hash(self.password_hash, password)
 
     def get_reset_password_token(self, expires_in=600):

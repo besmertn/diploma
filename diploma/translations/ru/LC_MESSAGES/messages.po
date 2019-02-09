@@ -1,0 +1,121 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-02-09 19:20+0200\n"
+"PO-Revision-Date: 2019-02-09 19:23+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: diploma/forms.py:10
+msgid "Username or email"
+msgstr "Имя пользователя или е-мейл"
+
+#: diploma/forms.py:11 diploma/forms.py:19 diploma/forms.py:41
+msgid "Password"
+msgstr "Пароль"
+
+#: diploma/forms.py:12
+msgid "Remember Me"
+msgstr "Запомнить меня"
+
+#: diploma/forms.py:13
+msgid "Sign In"
+msgstr "Войти"
+
+#: diploma/forms.py:17
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: diploma/forms.py:18 diploma/forms.py:36
+msgid "Email"
+msgstr "Е-мейл"
+
+#: diploma/forms.py:21 diploma/forms.py:43
+msgid "Repeat Password"
+msgstr "Подтверждение пароля"
+
+#: diploma/forms.py:22
+msgid "Register"
+msgstr "Регистрация"
+
+#: diploma/forms.py:27
+msgid "Please use a different username."
+msgstr "Пожалуйста используйте другое имя пользователя."
+
+#: diploma/forms.py:32
+msgid "Please use a different email address."
+msgstr "Пожалуйста используйте другой эл. адрес."
+
+#: diploma/forms.py:37 diploma/forms.py:44
+msgid "Request Password Reset"
+msgstr "Запросить сброс пароля"
+
+#: diploma/routes.py:40
+msgid "Invalid username or password"
+msgstr "Неверное имя пользователя или пароль"
+
+#: diploma/routes.py:66
+msgid "Congratulations, you are now a registered user!"
+msgstr "Поздравляем, теперь вы зарегистрированный пользователь!"
+
+#: diploma/routes.py:88
+msgid "Authentication failed."
+msgstr "Ошибка аутентификации."
+
+#: diploma/routes.py:119
+msgid "Check your email for the instructions to reset your password"
+msgstr "Проверьте свою электронную почту для получения инструкций по сбросу пароля"
+
+#: diploma/routes.py:136
+msgid "Your password has been reset."
+msgstr "Ваш пароль был сброшен."
+
+#: diploma/templates/404.html:4
+msgid "File Not Found"
+msgstr "Файл не найден"
+
+#: diploma/templates/base.html:28
+msgid "Home"
+msgstr "Главная"
+
+#: diploma/templates/base.html:33
+msgid "Login"
+msgstr "Вход"
+
+#: diploma/templates/base.html:35
+msgid "Logout"
+msgstr "Выход"
+
+#: diploma/templates/login.html:24
+msgid "Sign in with Google"
+msgstr "Войти с Google"
+
+#: diploma/templates/login.html:28
+msgid "Forgot Your Password?"
+msgstr "Забыли пароль?"
+
+#: diploma/templates/login.html:29
+msgid "Click to Reset It"
+msgstr "Нажмите, чтобы сбросить его"
+
+#: diploma/templates/login.html:32
+msgid "New User?"
+msgstr "Новый пользователь?"
+
+#: diploma/templates/login.html:33
+msgid "Click to Register!"
+msgstr "Нажмите, чтобы зарегистрироваться!"
+

@@ -2,7 +2,8 @@ import logging
 import os
 from logging.handlers import RotatingFileHandler
 
-from flask import Flask
+from flask import Flask, request
+from flask_babel import Babel
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_mail import Mail
@@ -19,6 +20,13 @@ login = LoginManager(app)
 login.login_view = 'login'
 mail = Mail(app)
 bootstrap = Bootstrap(app)
+babel = Babel(app)
+
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
 
 if not app.debug:
     if not os.path.exists('logs'):

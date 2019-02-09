@@ -1,6 +1,7 @@
 import os
 
 from flask import send_from_directory, render_template, flash, redirect, url_for, request
+from flask_babel import lazy_gettext as _l
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
@@ -36,7 +37,7 @@ def login():
         else:
             user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash(_l('Invalid username or password'))
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -62,7 +63,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash(_l('Congratulations, you are now a registered user!'))
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
@@ -84,7 +85,7 @@ def oauth_callback(provider):
     username, email = oauth.callback()
     if email is None:
         # I need a valid email address for my user identification
-        flash('Authentication failed.')
+        flash(_l('Authentication failed.'))
         return redirect(url_for('index'))
     # Look if the user already exists
     user = User.query.filter_by(email=email).first()
@@ -115,7 +116,7 @@ def reset_password_request():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash('Check your email for the instructions to reset your password')
+        flash(_l('Check your email for the instructions to reset your password'))
         return redirect(url_for('login'))
     return render_template('reset_password_request.html',
                            title='Reset Password', form=form)
@@ -132,6 +133,6 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('Your password has been reset.')
+        flash(_l('Your password has been reset.'))
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)

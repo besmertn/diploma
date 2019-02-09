@@ -4,6 +4,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
+    LANGUAGES = ['en', 'ru', 'uk']
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -17,6 +18,10 @@ class Config(object):
             'secret': GOOGLE_LOGIN_CLIENT_SECRET
         }
     }
+
+    ACCUWEATHER_API_KEY = 'Ywafhzvrhr3p4k8gNqFt4wOZk5lD2Ani'
+    ACCUWEATHER_LANGUAGE = 'en-us'
+
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
     MAIL_USE_SSL = True,

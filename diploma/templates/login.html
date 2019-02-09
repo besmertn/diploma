@@ -21,16 +21,16 @@
                     d="M81.4 222.2c7.8 22.9 22.8 43.2 42.6 57.1 12.4 8.7 26.6 14.9 41.4 17.9 14.6 3 29.7 2.6 44.4.1 14.6-2.6 28.7-7.9 41-16.2l59.1 45.9c-21.3 19.7-48 33.1-76.2 39.6-31.2 7.1-64.2 7.3-95.2-1-24.6-6.5-47.7-18.2-67.6-34.1-20.9-16.6-38.3-38-50.4-62 20.3-15.7 40.6-31.5 60.9-47.3z"
                     fill="#34A853"/></svg>
           </span>
-            <span class="google-button__text">Sign in with Google</span>
+            <span class="google-button__text">{{ _('Sign in with Google') }}</span>
         </button>
     </a>
      <p>
-        Forgot Your Password?
-        <a href="{{ url_for('reset_password_request') }}">Click to Reset It</a>
+         {{ _('Forgot Your Password?') }}
+         <a href="{{ url_for('reset_password_request') }}">{{ _('Click to Reset It') }}</a>
     </p>
     <p>
-        New User?
-        <a href="{{ url_for('register') }}">Click to Register!</a>
+        {{ _('New User?') }}
+        <a href="{{ url_for('register') }}">{{ _('Click to Register!') }}</a>
     </p>
 
 {% endblock %}

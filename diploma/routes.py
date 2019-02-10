@@ -6,6 +6,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
 from diploma import app, db
+from diploma.accuweather import AccuWeatherAPI
 from diploma.auth import OAuthSignIn
 from diploma.emails import send_password_reset_email
 from diploma.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm
@@ -22,6 +23,8 @@ def favicon():
 @app.route('/index')
 @login_required
 def index():
+    forecast = AccuWeatherAPI()
+    forecast.get_1hour_forecast(49.1, 39.02)
     user = {'username': 'Aleksandr'}
     return render_template('index.html', title='Home', user=user)
 

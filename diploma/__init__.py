@@ -2,7 +2,7 @@ import logging
 import os
 from logging.handlers import RotatingFileHandler
 
-from flask import Flask, request
+from flask import Flask
 from flask_babel import Babel
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
@@ -25,7 +25,8 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    # return request.accept_languages.best_match(app.config['LANGUAGES'])
+    return 'ru'
 
 
 if not app.debug:

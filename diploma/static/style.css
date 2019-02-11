@@ -43,3 +43,8 @@
     font-family: 'Roboto', arial, sans-serif;
 }
 
+#map {
+    height: 400px;
+    width: 100%;
+}
+

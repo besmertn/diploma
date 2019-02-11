@@ -19,6 +19,8 @@ class Config(object):
         }
     }
 
+    GOOGLE_MAPS_API_KEY = 'AIzaSyDMjp6-KGpAQNdipQEcSEbBPo2DCeey2rc'
+
     ACCUWEATHER_API_KEY = 'Ywafhzvrhr3p4k8gNqFt4wOZk5lD2Ani'
     ACCUWEATHER_LANGUAGE = 'en-us'
     ACCUWEATHER_BASIC_URL = 'http://dataservice.accuweather.com/'

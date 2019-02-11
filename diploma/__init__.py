@@ -42,3 +42,4 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('Application startup')
 
+from diploma import routes, models, forms, errors, accuweather, emails, auth

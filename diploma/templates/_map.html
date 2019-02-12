@@ -10,9 +10,22 @@
         // The map, centered at Uluru
         var map = new google.maps.Map(
             document.getElementById('map'), {zoom: 4, center: uluru});
+
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            title: 'Click to zoom'
+        });
+
+        map.addListener('click', function (event) {
+            var latitude = event.latLng.lat();
+            var longitude = event.latLng.lng();
+        });
         // The marker, positioned at Uluru
-        var marker = new google.maps.Marker({position: uluru, map: map});
+        //var marker = new google.maps.Marker({position: uluru, map: map});
     }
+
+
 </script>
 <!--Load the API from the specified URL
 * The async attribute allows the browser to render the page while the API loads

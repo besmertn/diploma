@@ -23,8 +23,6 @@ def favicon():
 @app.route('/index')
 @login_required
 def index():
-    forecast = AccuWeatherAPI()
-    forecast.get_1hour_forecast(49.1, 39.02)
     user = {'username': 'Aleksandr'}
     return render_template('index.html', title='Home', user=user)
 

@@ -1,5 +1,10 @@
 {% extends 'bootstrap/base.html' %}
 
+{% block scripts %}
+    {% include 'accuweather.html' %}
+    {{ super() }}
+{% endblock %}
+
 {% block head %}
     {{ super() }}
     <meta name="viewport" content="initial-scale=1.0">

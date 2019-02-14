@@ -4,13 +4,21 @@
     var basic_url = '{{ config['ACCUWEATHER_BASIC_URL'] }}';
 
     function get_location_key(lat, long) {
-        var result = '';
-        var params = {apikey: api_key, q: lat + "," + long};
-        $.get(basic_url + "locations/v1/cities/geoposition/search", params, function (data) {
-            alert(data['Key']);
-            result = data['Key'];
-        }, "json");
-        return result;
+        const params = {apikey: api_key, q: lat + "," + long};
+        $.ajax({
+            method:'GET',
+            url:basic_url + "locations/v1/cities/geoposition/search",
+            data: params,
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+
+            }
+        })
+            .done(function (data) {
+                alert(data['Key']);
+                return data['Key'];
+            });
     }
 
     function get_1hour_forecast(lat, long) {

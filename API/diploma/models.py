@@ -38,6 +38,16 @@ class User(UserMixin, db.Model):
             return
         return User.query.get(_id)
 
+    @property
+    def serialize(self):
+        """Return object data in easily serializeable format"""
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'password_hash': self.password_hash
+        }
+
 
 @login.user_loader
 def load_user(id):

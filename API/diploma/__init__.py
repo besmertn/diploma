@@ -9,6 +9,8 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+from flask_restful import Api
 
 from config import Config
 
@@ -21,6 +23,8 @@ login.login_view = 'login'
 mail = Mail(app)
 bootstrap = Bootstrap(app)
 babel = Babel(app)
+cors = CORS(app)
+api = Api(app)
 
 
 @babel.localeselector
@@ -42,4 +46,12 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('Application startup')
 
-from diploma import routes, models, forms, errors, accuweather, emails, auth
+from diploma import routes, models, forms, errors, accuweather, emails, auth, views, resources
+
+api.add_resource(resources.UserRegistration, '/registration')
+api.add_resource(resources.UserLogin, '/login')
+api.add_resource(resources.UserLogoutAccess, '/logout/access')
+api.add_resource(resources.UserLogoutRefresh, '/logout/refresh')
+api.add_resource(resources.TokenRefresh, '/token/refresh')
+api.add_resource(resources.AllUsers, '/users')
+api.add_resource(resources.SecretResource, '/secret')

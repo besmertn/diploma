@@ -1,12 +1,11 @@
 import os
 
-from flask import send_from_directory, render_template, flash, redirect, url_for, request
+from flask import send_from_directory, render_template, flash, redirect, url_for, request, jsonify
 from flask_babel import lazy_gettext as _l
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
 from diploma import app, db
-from diploma.accuweather import AccuWeatherAPI
 from diploma.auth import OAuthSignIn
 from diploma.emails import send_password_reset_email
 from diploma.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm
@@ -19,6 +18,11 @@ def favicon():
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
+#@app.route('/users', methods=['GET'])
+#def get_users():
+#    return jsonify(users=[u.serialize for u in User.query.all()])
+
+
 @app.route('/')
 @app.route('/index')
 @login_required
@@ -27,7 +31,7 @@ def index():
     return render_template('index.html', title='Home', user=user)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/loginn', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))

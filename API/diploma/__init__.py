@@ -11,6 +11,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_restful import Api
+from flask_jwt_extended import JWTManager
 
 from config import Config
 
@@ -25,6 +26,8 @@ bootstrap = Bootstrap(app)
 babel = Babel(app)
 cors = CORS(app)
 api = Api(app)
+app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
+jwt = JWTManager(app)
 
 
 @babel.localeselector

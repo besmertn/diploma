@@ -1,3 +1,4 @@
+from flask import jsonify
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, \
     get_jwt_identity, get_raw_jwt
@@ -93,8 +94,9 @@ class TokenRefresh(Resource):
 
 
 class AllUsers(Resource):
+    @jwt_required
     def get(self):
-        return {'message': 'List of users'}
+        return jsonify(users=[u.serialize for u in User.query.all()])
 
     def delete(self):
         return {'message': 'Delete all users'}

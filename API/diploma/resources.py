@@ -30,7 +30,7 @@ class UserRegistration(Resource):
             refresh_token = create_refresh_token(identity=data['username'])
             return {
                 'message': 'User {} was created'.format(data['username']),
-                'access_token': access_token,
+                'token': access_token,
                 'refresh_token': refresh_token
             }
         except:
@@ -54,7 +54,7 @@ class UserLogin(Resource):
             refresh_token = create_refresh_token(identity=data['username'])
             return {
                 'message': 'Logged in as {}'.format(user.username),
-                'access_token': access_token,
+                'token': access_token,
                 'refresh_token': refresh_token
             }
         else:

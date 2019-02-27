@@ -1,3 +1,3 @@
-from diploma import app
+from diploma import create_app
 
-app.run(debug=True)
+app = create_app()

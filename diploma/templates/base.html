@@ -2,20 +2,20 @@
 
 {% block scripts %}
     <script type="text/javascript">
-    window.appConfig = {
-        api_key: '{{ config['ACCUWEATHER_API_KEY'] }}',
-        language: '{{ config['ACCUWEATHER_LANGUAGE'] }}',
-        basic_url: '{{ config['ACCUWEATHER_BASIC_URL'] }}'
-    }
+        window.appConfig = {
+            api_key: '{{ config['ACCUWEATHER_API_KEY'] }}',
+            language: '{{ config['ACCUWEATHER_LANGUAGE'] }}',
+            basic_url: '{{ config['ACCUWEATHER_BASIC_URL'] }}'
+        }
     </script>
-    <script src="{{url_for('.static', filename='accuweather.js')}}"></script>
+    <script src="{{ url_for('.static', filename='accuweather.js') }}"></script>
     {{ super() }}
 {% endblock %}
 
 {% block head %}
     {{ super() }}
     <meta name="viewport" content="initial-scale=1.0">
-    <link rel="script" >
+    <link rel="script">
 {% endblock %}
 
 {% block styles %}
@@ -62,9 +62,9 @@
     <div class="container">
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-info" role="alert">{{ message }}</div>
-            {% endfor %}
+                {% for message in messages %}
+                    <div class="alert alert-info" role="alert">{{ message }}</div>
+                {% endfor %}
             {% endif %}
         {% endwith %}
 

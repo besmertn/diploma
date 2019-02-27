@@ -18,8 +18,7 @@
         });
 
         map.addListener('click', function (event) {
-            var latitude = event.latLng.lat();
-            var longitude = event.latLng.lng();
+            get_1hour_forecast(event.latLng.lat(), event.latLng.lng());
         });
         // The marker, positioned at Uluru
         //var marker = new google.maps.Marker({position: uluru, map: map});

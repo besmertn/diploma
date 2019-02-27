@@ -1,13 +1,21 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block scripts %}
-    {% include 'accuweather.html' %}
+    <script type="text/javascript">
+    window.appConfig = {
+        api_key: '{{ config['ACCUWEATHER_API_KEY'] }}',
+        language: '{{ config['ACCUWEATHER_LANGUAGE'] }}',
+        basic_url: '{{ config['ACCUWEATHER_BASIC_URL'] }}'
+    }
+    </script>
+    <script src="{{url_for('.static', filename='accuweather.js')}}"></script>
     {{ super() }}
 {% endblock %}
 
 {% block head %}
     {{ super() }}
     <meta name="viewport" content="initial-scale=1.0">
+    <link rel="script" >
 {% endblock %}
 
 {% block styles %}

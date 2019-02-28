@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn diploma:diploma
+web: flask db upgrade; gunicorn run:diploma

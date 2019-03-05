@@ -12,6 +12,12 @@ def favicon():
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
+@bp.route('/subscribe')
+@login_required()
+def subscribe():
+    current_app.task_queue.enqueue('diploma.subscriber.subscribe', 'iot.eclipse.org')
+
+
 @bp.route('/')
 @bp.route('/index')
 @login_required

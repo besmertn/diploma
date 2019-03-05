@@ -33,3 +33,5 @@ class Config(object):
     MAIL_USERNAME = 'besmertn@gmail.com'
     MAIL_PASSWORD = 'z9hn4goqb'
     ADMINS = 'besmertn@gmail.com'
+
+    REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'

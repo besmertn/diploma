@@ -2,6 +2,7 @@ import logging
 import os
 from logging.handlers import RotatingFileHandler
 
+import rq
 from flask import Flask
 from flask_babel import Babel
 from flask_bootstrap import Bootstrap
@@ -9,6 +10,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from redis import Redis
 
 from config import Config
 
@@ -31,6 +33,8 @@ def create_app(config_class=Config):
     mail.init_app(app)
     bootstrap.init_app(app)
     babel.init_app(app)
+    app.redis = Redis.from_url(app.config['REDIS_URL'])
+    app.task_queue = rq.Queue('diploma-tasks', connection=app.redis)
 
     from diploma.errors import bp as errors_bp
     from diploma.auth import bp as auth_bp

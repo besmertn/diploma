@@ -34,4 +34,4 @@ class Config(object):
     MAIL_PASSWORD = 'z9hn4goqb'
     ADMINS = 'besmertn@gmail.com'
 
-    REDIS_URL = os.environ.get('REDISTOGO_URL') or 'redis://'
+    REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'

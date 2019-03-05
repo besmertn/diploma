@@ -15,7 +15,7 @@ def favicon():
 
 @bp.route('/subscribe')
 def subscribe():
-    current_app.task_queue.enqueue(subscribe, 'iot.eclipse.org')
+    current_app.task_queue.enqueue(subscribe)
     return render_template('index.html', title='Home')
 
 

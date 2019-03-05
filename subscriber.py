@@ -15,9 +15,9 @@ def on_message(client, userdata, message):
     print("message retain flag=", message.retain)
 
 
-def subscribe(broker):
+def subscribe():
     client = mqtt.Client()
-    client.connect(broker)
+    client.connect('iot.eclipse.org')
 
     client.on_connect = on_connect
     client.on_message = on_message

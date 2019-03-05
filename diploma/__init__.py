@@ -34,7 +34,7 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
     babel.init_app(app)
     app.redis = Redis.from_url(app.config['REDIS_URL'])
-    app.task_queue = rq.Queue('diploma-tasks', connection=app.redis)
+    app.task_queue = rq.Queue(connection=app.redis)
 
     from diploma.errors import bp as errors_bp
     from diploma.auth import bp as auth_bp

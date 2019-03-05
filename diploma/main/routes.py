@@ -4,6 +4,7 @@ from flask import send_from_directory, render_template, current_app
 from flask_login import login_required
 
 from diploma.main import bp
+from subscriber import subscribe
 
 
 @bp.route('/favicon.ico')
@@ -14,7 +15,7 @@ def favicon():
 
 @bp.route('/subscribe')
 def subscribe():
-    current_app.task_queue.enqueue('diploma.subscriber.subscribe', 'iot.eclipse.org')
+    current_app.task_queue.enqueue(subscribe, 'iot.eclipse.org')
     return render_template('index.html', title='Home')
 
 

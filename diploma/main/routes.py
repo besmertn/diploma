@@ -13,14 +13,13 @@ def favicon():
 
 
 @bp.route('/subscribe')
-@login_required
 def subscribe():
     current_app.task_queue.enqueue('diploma.subscriber.subscribe', 'iot.eclipse.org')
+    return render_template('index.html', title='Home')
 
 
 @bp.route('/')
 @bp.route('/index')
 @login_required
 def index():
-    user = {'username': 'Aleksandr'}
-    return render_template('index.html', title='Home', user=user)
+    return render_template('index.html', title='Home')

@@ -48,3 +48,30 @@
     width: 100%;
 }
 
+h1 {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.settings_container {
+    height: 500px;
+    width: 100%;
+}
+
+.map_placeholder {
+    height: 100%;
+    width: 35%;
+    background-color: aquamarine;
+    display: block;
+    float: left;
+}
+
+.sensors_grid_placeholder {
+    height: 100%;
+    width: 60%;
+    background-color: cadetblue;
+    display: block;
+    float: right;
+}
+

@@ -4,10 +4,14 @@
     <h1>Sensors settings placeholder</h1>
     <div class="container settings_container">
         <div class="map_placeholder">
-            <h2>Placeholder</h2>
+            {% include 'settings/_map.html' %}
         </div>
-        <div class="sensors_grid_placeholder">
-            <h2>Placeholder</h2>
+        <div class="sensors_grid_placeholder container">
+            <div class="row">
+                <div class="col">One of three columns</div>
+                <div class="col">One of three columns</div>
+                <div class="col-sm">One of three columns</div>
+            </div>
         </div>
     </div>
 {% endblock %}

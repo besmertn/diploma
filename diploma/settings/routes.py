@@ -10,7 +10,7 @@ def account_settings():
     return render_template('settings/account.html', title='Account')
 
 
-@bp.route('/sensors')
+@bp.route('/sensor')
 @login_required
 def sensors_settings():
     return render_template('settings/sensors.html', title='Sensors')

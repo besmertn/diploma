@@ -1,6 +1,8 @@
+import enum
 from time import time
 
 import jwt
+from flask import current_app
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -15,6 +17,9 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+    def get_id(self):
+        return self.id
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -42,3 +47,30 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+
+class SensorStatus(int, enum.Enum):
+    NOT_RESPONDING = 0
+    ACTIVE = 1
+    NOT_ACTIVE = 2
+
+
+class SyncType(int, enum.Enum):
+    EACH_DAY = 0
+    EACH_12_HOURS = 1
+    EACH_6_HOURS = 2
+    EACH_3_HOURS = 3
+    HOURLY = 4
+
+
+class Sensor(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, index=True)
+    region_key = db.Column(db.Integer, index=True)
+    coordinates = db.Column(db.String(128))
+    status = db.Column(db.Enum(SensorStatus), index=True, )
+    sync_type = db.Column(db.Enum(SyncType))
+    is_shared = db.Column(db.Boolean, index=True, default=False)
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in Sensor.__table__.columns}

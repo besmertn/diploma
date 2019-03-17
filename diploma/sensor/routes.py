@@ -41,3 +41,8 @@ def create():
 @bp.route('/all', methods=['GET'])
 def get_all():
     return jsonify(sensors=[s.as_dict() for s in Sensor.query.all()])
+
+
+@bp.route('/region/<int:region_key>', methods=['GET'])
+def get_by_region_key(region_key):
+    return jsonify(sensors=[s.as_dict() for s in Sensor.query.filter_by(region_key=region_key).all()])

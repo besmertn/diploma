@@ -5,10 +5,12 @@
         window.appConfig = {
             api_key: '{{ config['ACCUWEATHER_API_KEY'] }}',
             language: '{{ config['ACCUWEATHER_LANGUAGE'] }}',
-            basic_url: '{{ config['ACCUWEATHER_BASIC_URL'] }}'
+            accu_basic_url: '{{ config['ACCUWEATHER_BASIC_URL'] }}',
+            basic_url: '{{ request.host_url }}'
         }
     </script>
     <script src="{{ url_for('static', filename='accuweather.js') }}"></script>
+    <script src="{{ url_for('static', filename='sensors.js') }}"></script>
     {{ super() }}
 {% endblock %}
 

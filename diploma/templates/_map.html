@@ -2,8 +2,6 @@
 <h3>My Google Maps Demo</h3>
 <!--The div element for the map -->
 <script>
-
-
     // Initialize and add the map
     function initMap() {
 
@@ -214,6 +212,7 @@
             ],
             {name: 'Styled Map'});
 
+        let markersArray = [];
         // The location of Uluru
         let center = {lat: -25.344, lng: 131.036};
         // The map, centered at Uluru
@@ -229,18 +228,42 @@
         map.mapTypes.set('styled_map', styledMapType);
         map.setMapTypeId('styled_map');
 
-        let marker = new google.maps.Marker({
-            position: center,
-            map: map,
-            title: 'Click to zoom'
-        });
+        map.addListener('click', async function (event) {
+            while (markersArray.length) {
+                markersArray.pop().setMap(null);
+            }
+            let regionData = await get_region_info(event.latLng.lat(), event.latLng.lng());
+            let sensors = await getSensorsByRegionKey(regionData['Key']);
+            let temperature = await get_1hour_forecast(regionData['Key']);
 
-        map.addListener('click', function (event) {
-            console.log(event.latLng.lat() + "," + event.latLng.lng());
-            get_1hour_forecast(event.latLng.lat(), event.latLng.lng());
+            let contentString = '<div id="content">' +
+                '<div id="siteNotice"></div>' +
+                '<h2 id="regionName" align="left" class="firstHeading">' +
+                regionData['Region']['LocalizedName'] + ': ' + regionData['LocalizedName'] + '</h2>' +
+                '<h4 class="alert-heading">You have ' + sensors.length + ' sensors in ths region</h4>' +
+                '<div id="bodyContent"><p><b>Current Temperature in the Region: ' +
+                temperature['Value'] + ' ' + temperature['Unit'] + '</b></p>' +
+                '    <p></p>' +
+                '    <p><a href="#">See detailed statistic for this region...</a></p>' +
+                '</div>' +
+                '</div>';
+
+            let infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            let marker = new google.maps.Marker({
+
+                position: {lat: event.latLng.lat(), lng: event.latLng.lng()},
+                map: map,
+                title: 'Uluru (Ayers Rock)'
+            });
+
+
+            markersArray.push(marker);
+            infowindow.open(map, marker);
+
         });
-        // The marker, positioned at Uluru
-        //var marker = new google.maps.Marker({position: uluru, map: map});
     }
 
 

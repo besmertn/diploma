@@ -1,6 +1,7 @@
 from flask import render_template
-from flask_login import login_required
+from flask_login import login_required, current_user
 
+from diploma.sensor.routes import get_all, SensorStatus, SyncType
 from diploma.settings import bp
 
 
@@ -13,4 +14,12 @@ def account_settings():
 @bp.route('/sensor')
 @login_required
 def sensors_settings():
-    return render_template('settings/sensors.html', title='Sensors')
+    sensors = get_all().get_json()
+    current_user_sensors = []
+    for sensor in sensors['sensors']:
+        if sensor['user_id'] == current_user.get_id():
+            sensor['sync_type'] = SyncType(sensor['sync_type']).name
+            sensor['status'] = SensorStatus(sensor['status']).name
+            current_user_sensors.append(sensor)
+    print(current_user_sensors)
+    return render_template('settings/sensors.html', title='Sensors', sensors=current_user_sensors)

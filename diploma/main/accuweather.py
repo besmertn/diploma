@@ -33,3 +33,24 @@ class AccuWeatherAPI:
                                 params=params)
         print(response.json())
         return response.json()
+
+    def get_region_info(self, region_key):
+        params = {
+            'apikey': self.api_key,
+            'lanuage': self.language,
+            'details': 'false'
+        }
+        response = requests.get(self.basic_url + "locations/v1/" + str(region_key), params=params)
+        return response.json()
+
+    def get_region_info(self, lat, long):
+        params = {
+            'apikey': self.api_key,
+            'q': '%s,%s' % (lat, long),
+            'lanuage': self.language,
+            'details': 'false',
+            'toplevel': 'false'
+        }
+        response = requests.get(self.basic_url + "locations/v1/cities/geoposition/search", params=params)
+        print(response.json())
+        return response.json()

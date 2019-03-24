@@ -18,8 +18,14 @@ def create():
         coords = data['coordinates'].split(',')
         print(coords)
         weather = AccuWeatherAPI()
-        region_key = weather.get_location_key(lat=coords[0], long=coords[1])
-        data['region_key'] = region_key
+        region_info = weather.get_region_info(lat=coords[0], long=coords[1])
+        data['region_key'] = region_info['Key']
+        data['region_name'] = region_info['Country']['LocalizedName'] + ': ' + region_info['LocalizedName']
+
+    if 'region_name' not in data:
+        weather = AccuWeatherAPI()
+        region_info = weather.get_region_info(region_key=data['region_key'])
+        data['region_name'] = region_info['Country']['LocalizedName'] + ': ' + region_info['LocalizedName']
 
     if 'sync_type' not in data:
         data['sync_type'] = SyncType.EACH_DAY.value
@@ -27,6 +33,7 @@ def create():
     sensor = Sensor(
         user_id=current_user.get_id(),
         region_key=data['region_key'],
+        region_name=data['region_name'],
         coordinates=data['coordinates'],
         status=SensorStatus.ACTIVE,
         sync_type=SyncType(data['sync_type'])

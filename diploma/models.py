@@ -67,6 +67,7 @@ class Sensor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, index=True)
     region_key = db.Column(db.Integer, index=True)
+    region_name = db.Column(db.String(128))
     coordinates = db.Column(db.String(128))
     status = db.Column(db.Enum(SensorStatus), index=True, )
     sync_type = db.Column(db.Enum(SyncType))

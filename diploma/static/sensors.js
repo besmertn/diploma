@@ -6,3 +6,14 @@ async function getSensorsByRegionKey(regionKey) {
     }, "json");
     return result;
 }
+
+let instance = OverlayScrollbars(document.getElementById('sensors_table'), {
+    scrollbars: {
+        visibility: "auto",
+        autoHide: "leave",
+        autoHideDelay: 800,
+        dragScrolling: true,
+        clickScrolling: false,
+        touchSupport: true
+    },
+});

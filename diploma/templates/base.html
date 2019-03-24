@@ -10,7 +10,10 @@
         }
     </script>
     <script src="{{ url_for('static', filename='accuweather.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='OverlayScrollbars.js') }}"></script>
     <script src="{{ url_for('static', filename='sensors.js') }}"></script>
+
     {{ super() }}
 {% endblock %}
 
@@ -23,6 +26,7 @@
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='OverlayScrollbars.css') }}">
 
 {% endblock %}
 
@@ -43,7 +47,7 @@
                     <a class="nav-link" href="{{ url_for('main.index') }}">{{ _('Home') }} <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="#">{{ _('Statistic') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>

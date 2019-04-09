@@ -1,10 +1,7 @@
 <div id="sensors_map"></div>
 <h3>Sensors location</h3>
-<!--The div element for the map -->
 <script>
 
-
-    // Initialize and add the map
     function initMap() {
 
         const styledMapType = new google.maps.StyledMapType(
@@ -214,9 +211,9 @@
             ],
             {name: 'Styled Map'});
 
-        // The location of Uluru
+        let markersArray = [];
+
         let center = {lat: -25.344, lng: 131.036};
-        // The map, centered at Uluru
         let map = new google.maps.Map(
             document.getElementById('sensors_map'), {
                 zoom: 4,
@@ -224,13 +221,28 @@
                 mapTypeControlOptions: {
                     mapTypeIds: ['styled_map', 'terrain']
                 }
-            })
+            });
+
+        Array.from(document.getElementsByClassName("sensor")).forEach(function (sensor) {
+            google.maps.event.addDomListener(sensor, 'click', function () {
+                while (markersArray.length) {
+                    markersArray.pop().setMap(null);
+                }
+                const LatLng = sensor.childNodes[1].textContent.split(", ");
+                var Lat = parseFloat(LatLng[0]);
+                var Lng = parseFloat(LatLng[1]);
+                let marker = new google.maps.Marker({
+
+                    position: new google.maps.LatLng(Lat, Lng),
+                    map: map,
+                    title: 'Uluru (Ayers Rock)'
+                });
+                markersArray.push(marker);
+            });
+        });
 
         map.mapTypes.set('styled_map', styledMapType);
         map.setMapTypeId('styled_map');
-
-        // The marker, positioned at Uluru
-        //var marker = new google.maps.Marker({position: uluru, map: map});
     }
 
 

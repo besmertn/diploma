@@ -3,8 +3,14 @@
 {% block app_content %}
     <h1>Sensors settings placeholder</h1>
     <div class="container settings_container">
+        <!-- Modal -->
+        {% include 'settings/delete_sensor_modal.html' %}
         <div class="map_placeholder">
             {% include 'settings/_map.html' %}
+        </div>
+        <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
+            <a class="dropdown-item" href="#">Edit</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter" href="#">Delete</a>
         </div>
         <div class="container sensors_grid_container" id="sensors_table">
             <table class="table table-striped">
@@ -19,7 +25,7 @@
                 </thead>
                 <tbody>
                 {% for sensor in sensors %}
-                    <tr>
+                    <tr class="sensor" id="sensor{{ sensor['id'] }}">
                         <td>{{ sensor['coordinates'] }}</td>
                         <td>{{ sensor['region_name'] }}</td>
                         <td>{{ sensor['is_shared'] }}</td>
@@ -27,22 +33,22 @@
                         <td>{{ sensor['status'] }}</td>
                     </tr>
                 {% endfor %}
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
+                <tr class="sensor" id="sensor12">
+                    <td>-25.344, 131.036</td>
                     <td>a</td>
                     <td>a}</td>
                     <td>{a</td>
                     <td>a</td>
                 </tr>
-                <tr>
+                <tr class="sensor" id="sensor13">
+                    <td>-22.344, 131.036</td>
                     <td>a</td>
+                    <td>a}</td>
+                    <td>{a</td>
+                    <td>a</td>
+                </tr>
+                <tr class="sensor" id="sensor522">
+                    <td>-23.344, 131.036</td>
                     <td>a</td>
                     <td>a}</td>
                     <td>{a</td>

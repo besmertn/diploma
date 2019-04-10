@@ -8,9 +8,9 @@
         <div class="map_placeholder">
             {% include 'settings/_map.html' %}
         </div>
-        <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
-            <a class="dropdown-item" href="#">Edit</a>
-            <a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter" href="#">Delete</a>
+        <div class="dropdown-menu dropdown-menu-sm" id="delete-context-menu">
+            <a class="dropdown-item" href="#">{{ _('Edit') }}</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#deleteSensorModal" href="#">{{ _('Delete') }}</a>
         </div>
         <div class="container sensors_grid_container" id="sensors_table">
             <table class="table table-striped">

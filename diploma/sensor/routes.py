@@ -12,7 +12,7 @@ from diploma.sensor import bp
 def create():
     data = request.get_json()
     if not data:
-        return jsonify({'error': 'empty request'})
+        return jsonify({'status': 'Failed', 'message': 'empty request'}), 400
 
     if 'region_key' not in data:
         coords = data['coordinates'].split(',')
@@ -45,11 +45,52 @@ def create():
     return jsonify({'status': 'OK'})
 
 
+@bp.route('/<int:sensor_id>', methods=['PUT'])
+@login_required
+def update(sensor_id):
+    data = request.get_json()
+
+    sensor = Sensor.query.filter_by(id=sensor_id).first()
+
+    if not sensor:
+        return jsonify({'status': 'Failed', 'message': 'No sensor with such id: {}'.format(sensor_id)}), 400
+
+    if 'coordinates' in data:
+        sensor.coordinates = data['coordinates']
+    if 'region_name' in data:
+        sensor.region_name = data['region_name']
+    if 'region_key' in data:
+        sensor.region_key = data['region_key']
+    if 'sync_type' in data:
+        sensor.sync_type = SyncType(data['sync_type'])
+    if 'status' in data:
+        sensor.status = SensorStatus(data['status'])
+    if 'is_shared' in data:
+        sensor.is_shared = data['is_shared']
+
+    db.session.commit()
+    return jsonify({'status': 'Success', 'sensor': sensor.as_dict()}), 200
+
+
+@bp.route('/<int:sensor_id>', methods=['DELETE'])
+@login_required
+def delete(sensor_id):
+    sensor = Sensor.query.filter_by(id=sensor_id).first()
+
+    if not sensor:
+        return jsonify({'status': 'Failed', 'message': 'No sensor with such id: {}'.format(sensor_id)}), 400
+
+    Sensor.query.filter_by(id=sensor_id).delete()
+    db.session.commit()
+
+    return jsonify({'status': 'Success'}), 200
+
+
 @bp.route('/all', methods=['GET'])
 def get_all():
-    return jsonify(sensors=[s.as_dict() for s in Sensor.query.all()])
+    return jsonify(sensors=[s.as_dict() for s in Sensor.query.all()]), 200
 
 
 @bp.route('/region/<int:region_key>', methods=['GET'])
 def get_by_region_key(region_key):
-    return jsonify(sensors=[s.as_dict() for s in Sensor.query.filter_by(region_key=region_key).all()])
+    return jsonify(sensors=[s.as_dict() for s in Sensor.query.filter_by(region_key=region_key).all()]), 200

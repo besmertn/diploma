@@ -229,14 +229,21 @@
                     markersArray.pop().setMap(null);
                 }
                 const LatLng = sensor.childNodes[1].textContent.split(", ");
-                var Lat = parseFloat(LatLng[0]);
-                var Lng = parseFloat(LatLng[1]);
+                let Lat = parseFloat(LatLng[0]);
+                let Lng = parseFloat(LatLng[1]);
+
+                let markerPosition = new google.maps.LatLng(Lat, Lng);
+
                 let marker = new google.maps.Marker({
 
-                    position: new google.maps.LatLng(Lat, Lng),
+                    position: markerPosition,
                     map: map,
-                    title: 'Uluru (Ayers Rock)'
+                    title: markerPosition
                 });
+
+                map.panTo(markerPosition);
+                map.setZoom(10);
+
                 markersArray.push(marker);
             });
         });

@@ -87,10 +87,22 @@ def delete(sensor_id):
 
 
 @bp.route('/all', methods=['GET'])
+@login_required
 def get_all():
     return jsonify(sensors=[s.as_dict() for s in Sensor.query.all()])
 
 
 @bp.route('/region/<int:region_key>', methods=['GET'])
+@login_required
 def get_by_region_key(region_key):
     return jsonify(sensors=[s.as_dict() for s in Sensor.query.filter_by(region_key=region_key).all()])
+
+
+@bp.route('/status-list', methods=['GET'])
+def get_status_list():
+    return jsonify(SensorStatus.as_dict())
+
+
+@bp.route('/sync-list', methods=['GET'])
+def get_sync_list():
+    return jsonify(SyncType.as_dict())

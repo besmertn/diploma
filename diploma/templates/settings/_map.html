@@ -228,7 +228,7 @@
                 while (markersArray.length) {
                     markersArray.pop().setMap(null);
                 }
-                const LatLng = sensor.childNodes[1].textContent.split(", ");
+                const LatLng = sensor.childNodes[1].textContent.replace(" ", "").split(",");
                 let Lat = parseFloat(LatLng[0]);
                 let Lng = parseFloat(LatLng[1]);
 

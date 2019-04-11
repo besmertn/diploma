@@ -58,4 +58,27 @@ $('#deleteSensorModalButton').click(function () {
     });
 });
 
+$('.is_shared').change(function () {
+    $.ajax({
+        url: appConfig.basic_url + "sensor/" + $(this).prop('id').replace("is_shared", ""),
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify({is_shared: $(this).prop('checked')}),
+    }).done(function () {
 
+    });
+});
+
+$('.sync_type').on('click', function () {
+    let sensor_id = $(this).prop('id').replace("sync_type", "");
+    //alert($(this).text())
+    $.ajax({
+        url: appConfig.basic_url + "sensor/" + sensor_id,
+        type: 'PUT',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({sync_type: $(this).data('index')}),
+    }).done(function (response) {
+        $('#sync_typeDropdownMenuButton' + sensor_id).text(sync_type_list[response['sensor']['sync_type']]);
+    });
+});

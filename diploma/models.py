@@ -54,6 +54,10 @@ class SensorStatus(int, enum.Enum):
     ACTIVE = 1
     NOT_ACTIVE = 2
 
+    @staticmethod
+    def as_dict():
+        return {0: 'Not Responding', 1: 'Active', 2: 'Not Active'}
+
 
 class SyncType(int, enum.Enum):
     EACH_DAY = 0
@@ -61,6 +65,10 @@ class SyncType(int, enum.Enum):
     EACH_6_HOURS = 2
     EACH_3_HOURS = 3
     HOURLY = 4
+
+    @staticmethod
+    def as_dict():
+        return {0: 'Each day', 1: 'Each 12 Hours', 2: 'Each 6 Hours', 3: 'Each 3 Hours', 4: 'Hourly'}
 
 
 class Sensor(db.Model):

@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
 {% block app_content %}
+    <script>
+        let sync_type_list = {{ sync_list|tojson|safe }};
+        let status_list = {{ status_list|tojson|safe }};
+    </script>
     <h1>Sensors settings placeholder</h1>
     <div class="container settings_container">
         <!-- Modal -->
@@ -9,7 +13,7 @@
             {% include 'settings/_map.html' %}
         </div>
         <div class="dropdown-menu dropdown-menu-sm" id="delete-context-menu">
-            <a class="dropdown-item" href="#">{{ _('Edit') }}</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#editSensorModal" href="#">{{ _('Edit') }}</a>
             <a class="dropdown-item" data-toggle="modal" data-target="#deleteSensorModal" href="#">{{ _('Delete') }}</a>
         </div>
         <div class="container sensors_grid_container" id="sensors_table">
@@ -28,9 +32,56 @@
                     <tr class="sensor" id="sensor{{ sensor['id'] }}">
                         <td>{{ sensor['coordinates'] }}</td>
                         <td>{{ sensor['region_name'] }}</td>
-                        <td>{{ sensor['is_shared'] }}</td>
-                        <td>{{ sensor['sync_type'] }}</td>
-                        <td>{{ sensor['status'] }}</td>
+                        <td>
+                            {% if sensor['is_shared'] %}
+                                <label>
+                                    <input class="is_shared" type="checkbox" data-onstyle="secondary" checked
+                                           data-toggle="toggle"
+                                           data-on="Yes" data-off="No" data-size="small"
+                                           id="is_shared{{ sensor['id'] }}">
+                                </label>
+                            {% else %}
+                                <label>
+                                    <input class="is_shared" type="checkbox" data-onstyle="secondary"
+                                           data-toggle="toggle"
+                                           data-on="Yes" data-off="No" data-size="small"
+                                           id="is_shared{{ sensor['id'] }}">
+                                </label>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="sync_typeDropdownMenuButton{{ sensor['id'] }}"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ sync_list[str(sensor['sync_type'])] }}
+                                </button>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    {% for item in sync_list %}
+                                        <a class="dropdown-item sync_type" data-index="{{ item }}"
+                                           id="sync_type{{ sensor['id'] }}"
+                                           href="#">{{ sync_list[item] }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="statusDropdownMenuButton{{ sensor['id'] }}"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ status_list[str(sensor['status'])] }}
+                                </button>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    {% for item in status_list %}
+                                        <a class="dropdown-item status" id="sensor{{ sensor['id'] }}status{{ item }}"
+                                           href="#">{{ status_list[item] }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
                 <tr class="sensor" id="sensor12">

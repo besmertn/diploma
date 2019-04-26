@@ -5,7 +5,7 @@
         let sync_type_list = {{ sync_list|tojson|safe }};
         let status_list = {{ status_list|tojson|safe }};
     </script>
-    <h1>Sensors settings placeholder</h1>
+    <h1>{{ _('Sensors settings') }}</h1>
     <div class="container settings_container">
         <!-- Modal -->
         {% include 'settings/delete_sensor_modal.html' %}

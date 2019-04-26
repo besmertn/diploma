@@ -18,7 +18,6 @@ let instance = OverlayScrollbars(document.getElementById('sensors_table'), {
     },
 });
 
-
 let sensor;
 
 $('.sensor').on('contextmenu', function (e) {
@@ -36,17 +35,7 @@ $('.sensor').on('contextmenu', function (e) {
 });
 
 $("#delete-context-menu a").on("click", function () {
-    //;alert(sensor.getAttribute("id"));
     $(this).parent().removeClass("show").hide();
-});
-
-$(document).ready(function () {
-    $('#deleteSensorModal').on('show.bs.modal', function () {
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        let modal = $(this);
-        //modal.find("#exampleModalLongTitle").text(sensor.childNodes[1].textContent);
-    });
 });
 
 $('#deleteSensorModalButton').click(function () {

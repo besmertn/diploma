@@ -41,12 +41,14 @@ def create_app(config_class=Config):
     from diploma.main import bp as main_bp
     from diploma.settings import bp as settings_bp
     from diploma.sensor import bp as sensor_bp
+    from diploma.statistic import bp as statistic_bp
 
     app.register_blueprint(errors_bp)
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(main_bp)
     app.register_blueprint(settings_bp, url_prefix='/settings')
     app.register_blueprint(sensor_bp, url_prefix='/sensor')
+    app.register_blueprint(statistic_bp, url_prefix='/statistic')
 
     if not app.debug:
         if app.config['LOG_TO_STDOUT']:

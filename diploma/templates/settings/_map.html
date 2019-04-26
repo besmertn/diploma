@@ -209,7 +209,7 @@
                     ]
                 }
             ],
-            {name: 'Styled Map'});
+            {name: {{ _('Map') }}});
 
         let markersArray = [];
 
@@ -237,8 +237,7 @@
                 let marker = new google.maps.Marker({
 
                     position: markerPosition,
-                    map: map,
-                    title: markerPosition
+                    map: map
                 });
 
                 map.panTo(markerPosition);

@@ -71,7 +71,7 @@ $('.is_shared').change(function () {
 
 $('.sync_type').on('click', function () {
     let sensor_id = $(this).prop('id').replace("sync_type", "");
-    //alert($(this).text())
+
     $.ajax({
         url: appConfig.basic_url + "sensor/" + sensor_id,
         type: 'PUT',
@@ -80,5 +80,19 @@ $('.sync_type').on('click', function () {
         data: JSON.stringify({sync_type: $(this).data('index')}),
     }).done(function (response) {
         $('#sync_typeDropdownMenuButton' + sensor_id).text(sync_type_list[response['sensor']['sync_type']]);
+    });
+});
+
+$('.status').on('click', function () {
+    let sensor_id = $(this).prop('id').replace("status", "");
+
+    $.ajax({
+        url: appConfig.basic_url + "sensor/" + sensor_id,
+        type: 'PUT',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({status: $(this).data('index')}),
+    }).done(function (response) {
+        $('#statusDropdownMenuButton' + sensor_id).text(status_list[response['sensor']['status']]);
     });
 });

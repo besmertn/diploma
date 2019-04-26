@@ -76,6 +76,7 @@ h1 {
     width: 60%;
     display: block;
     float: right;
+    font-family: "Roboto", sans-serif;
 }
 
 /* Bootstrap Toggle v2.2.2 corrections for Bootsrtap 4*/

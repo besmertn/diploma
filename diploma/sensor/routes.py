@@ -49,9 +49,7 @@ def create():
 @login_required
 def update(sensor_id):
     data = request.get_json()
-
     sensor = Sensor.query.filter_by(id=sensor_id).first()
-
     if not sensor:
         return jsonify({'status': 'Failed', 'message': 'No sensor with such id: {}'.format(sensor_id)}), 400
 

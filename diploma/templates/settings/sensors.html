@@ -51,7 +51,7 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
                                         id="sync_typeDropdownMenuButton{{ sensor['id'] }}"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ sync_list[str(sensor['sync_type'])] }}
@@ -68,7 +68,7 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
                                         id="statusDropdownMenuButton{{ sensor['id'] }}"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ status_list[str(sensor['status'])] }}
@@ -76,7 +76,8 @@
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     {% for item in status_list %}
-                                        <a class="dropdown-item status" id="sensor{{ sensor['id'] }}status{{ item }}"
+                                        <a class="dropdown-item status" data-index="{{ item }}"
+                                           id="status{{ sensor['id'] }}"
                                            href="#">{{ status_list[item] }}</a>
                                     {% endfor %}
                                 </div>
@@ -84,279 +85,6 @@
                         </td>
                     </tr>
                 {% endfor %}
-                <tr class="sensor" id="sensor12">
-                    <td>-25.344, 131.036</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr class="sensor" id="sensor13">
-                    <td>-22.344, 131.036</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr class="sensor" id="sensor522">
-                    <td>-23.344, 131.036</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a}</td>
-                    <td>{a</td>
-                    <td>a</td>
-                </tr>
                 </tbody>
             </table>
         </div>

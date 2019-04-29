@@ -83,3 +83,17 @@ class Sensor(db.Model):
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in Sensor.__table__.columns}
+
+
+class Record(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sensor_id = db.Column(db.Integer, db.ForeignKey('sensor.id'), index=True)
+    timestamp = db.Column(db.DateTime, index=True)
+    pm10 = db.Column(db.Float, nullable=False)
+    pm25 = db.Column(db.Float, nullable=False)
+    temperature = db.Column(db.Integer, nullable=False)
+    humidity = db.Column(db.Float, nullable=False)
+    rainfall = db.Column(db.Float, nullable=False)
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in Record.__table__.columns}

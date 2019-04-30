@@ -90,6 +90,19 @@ def get_all():
     return jsonify(sensors=[s.as_dict() for s in Sensor.query.all()])
 
 
+@bp.route('/all_available', methods=['GET'])
+@login_required
+def get_all_available():
+    return jsonify(sensors=[s.as_dict() for s in
+                            Sensor.query.filter(Sensor.user_id == current_user.get_id() or Sensor.is_shared).all()])
+
+
+@bp.route('/user/<int:user_id>', methods=['GET'])
+@login_required
+def get_by_user_id(user_id):
+    return jsonify(sensors=[s.as_dict() for s in Sensor.query.filter_by(user_id=user_id).all()])
+
+
 @bp.route('/region/<int:region_key>', methods=['GET'])
 @login_required
 def get_by_region_key(region_key):

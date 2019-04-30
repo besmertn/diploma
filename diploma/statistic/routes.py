@@ -2,6 +2,7 @@ from flask import render_template
 from flask_login import login_required
 
 from diploma.statistic import bp
+from models import Record
 
 
 @bp.route('/')
@@ -17,4 +18,5 @@ def index():
         [6, 11, 41],
         [7, 10, 20]
     ]
+    Record.query.filter_by(region_key=region_key)
     return render_template('statistic/index.html', title='Statistic', data=data)

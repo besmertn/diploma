@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        let statisticData = {{ data|safe }};
+
+        google.charts.load('current', {'packages': ['line']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            let data = new google.visualization.arrayToDataTable(statisticData);
+            let options = {
+                chart: {
+                    title: '{{ _('The concentration of particles in the air') }}',
+                    subtitle: '{{ _('in mg/m3') }}'
+                },
+                width: 900,
+                height: 500
+            };
+
+            let chart = new google.charts.Line(document.getElementById('line_chart'));
+
+            chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+    </script>
+{% endblock %}
+
+{% block app_content %}
+    <div id="line_chart"></div>
+{% endblock %}

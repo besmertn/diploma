@@ -88,7 +88,7 @@ class Sensor(db.Model):
 class Record(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sensor_id = db.Column(db.Integer, db.ForeignKey('sensor.id'), index=True)
-    timestamp = db.Column(db.DateTime, index=True)
+    timestamp = db.Column(db.TIMESTAMP, index=True)
     pm10 = db.Column(db.Float, nullable=False)
     pm25 = db.Column(db.Float, nullable=False)
     temperature = db.Column(db.Integer, nullable=False)

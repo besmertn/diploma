@@ -11,8 +11,11 @@ from diploma.sensor import bp
 @login_required
 def create():
     data = request.get_json()
+
     if not data:
-        return jsonify({'status': 'Failed', 'message': 'empty request'}), 400
+        data = request.form.to_dict()
+        if not data:
+            return jsonify({'status': 'Failed', 'message': 'empty request'}), 400
 
     if 'region_key' not in data:
         coords = data['coordinates'].split(',')
@@ -36,7 +39,7 @@ def create():
         region_name=data['region_name'],
         coordinates=data['coordinates'],
         status=SensorStatus.ACTIVE,
-        sync_type=SyncType(data['sync_type'])
+        sync_type=SyncType(int(data['sync_type']))
     )
 
     db.session.add(sensor)
@@ -110,10 +113,12 @@ def get_by_region_key(region_key):
 
 
 @bp.route('/status-list', methods=['GET'])
+@login_required
 def get_status_list():
     return jsonify(SensorStatus.as_dict())
 
 
 @bp.route('/sync-list', methods=['GET'])
+@login_required
 def get_sync_list():
     return jsonify(SyncType.as_dict())

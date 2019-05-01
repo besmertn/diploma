@@ -11,14 +11,14 @@ def account_settings():
     return render_template('settings/account.html', title='Account')
 
 
-@bp.route('/sensor')
+@bp.route('/sensor', methods=['GET'])
 @login_required
 def sensors_settings():
     sensors = get_by_user_id(current_user.get_id()).get_json()
     for sensor in sensors['sensors']:
         sensor['sync_type'] = SyncType(sensor['sync_type']).value
         sensor['status'] = SensorStatus(sensor['status']).value
-    print(sensors)
+
     return render_template('settings/sensors.html',
                            title='Sensors',
                            sensors=sensors,

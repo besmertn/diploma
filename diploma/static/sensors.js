@@ -85,3 +85,16 @@ $('.status').on('click', function () {
         $('#statusDropdownMenuButton' + sensor_id).text(status_list[response['sensor']['status']]);
     });
 });
+
+$('#createSensorModalButton').click(function () {
+    $('#createSensorForm').submit(function () {
+        $.ajax({
+            type: "POST",
+            url: appConfig.basic_url + "sensor/create",
+            data: $(this).serialize(),
+        }).done(function () {
+            window.location.reload();
+        });
+    }).submit();
+    window.location.replace(appConfig.basic_url + "settings/sensor");
+});

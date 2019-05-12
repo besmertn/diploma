@@ -6,12 +6,22 @@
     <script>
         let statisticData = {{ data|safe }};
 
-        google.charts.load('current', {'packages': ['line']});
-        google.charts.setOnLoadCallback(drawChart);
+        for (let i = 1; i < statisticData.length; i++) {
+            statisticData[i][0] = new Date(statisticData[i][0]);
+        }
 
-        function drawChart() {
+
+        google.charts.load('current', {'packages': ['line']});
+        google.charts.setOnLoadCallback(function () {
+            drawChart([0, 1, 2])
+        });
+
+        function drawChart(selectedColumn) {
 
             let data = new google.visualization.arrayToDataTable(statisticData);
+            let myView = new google.visualization.DataView(data);
+            myView.setColumns(selectedColumn);
+
             let options = {
                 chart: {
                     title: '{{ _('The concentration of particles in the air') }}',
@@ -23,11 +33,54 @@
 
             let chart = new google.charts.Line(document.getElementById('line_chart'));
 
-            chart.draw(data, google.charts.Line.convertOptions(options));
+            chart.draw(myView, google.charts.Line.convertOptions(options));
         }
     </script>
 {% endblock %}
 
 {% block app_content %}
-    <div id="line_chart"></div>
+    <div class="container">
+        <div class="container options">
+            <div class="datepicker-container">
+                <label class="form-check-label" for="fromDatepicker">
+                    From:
+                </label>
+                <input type='text' class='datepicker-here' data-timepicker="true" id="fromDatepicker"/>
+
+                <label class="form-check-label" for="toDatepicker">
+                    To:
+                </label>
+                <input type='text' class='datepicker-here' data-timepicker="true" id="toDatepicker"/>
+
+            </div>
+            <div class="checkbox-container">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="1" id="pm10CheckBox" checked>
+                    <label class="form-check-label" for="pm10CheckBox">
+                        PM10
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="2" id="pm25CheckBox" checked>
+                    <label class="form-check-label" for="pm25CheckBox">
+                        PM2.5
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="3" id="temperatureCheckBox" checked>
+                    <label class="form-check-label" for="temperatureCheckBox">
+                        Temperature
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="4" id="humidityCheckBox" checked>
+                    <label class="form-check-label" for="humidityCheckBox">
+                        Humidity
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div id="line_chart"></div>
+    </div>
+
 {% endblock %}

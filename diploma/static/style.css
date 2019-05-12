@@ -92,3 +92,18 @@ h1 {
     background-color: white;
     border: thin rgba(0, 0, 0, .25) solid;
 }
+
+.options {
+    width: 20%;
+    float: left;
+}
+
+#line_chart {
+    width: 80%;
+    float: right;
+}
+
+.datepicker-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

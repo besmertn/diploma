@@ -1,5 +1,6 @@
 from flask import request, jsonify
 from flask_login import login_required, current_user
+from sqlalchemy import or_
 
 from diploma import db
 from diploma.main.accuweather import AccuWeatherAPI
@@ -96,8 +97,7 @@ def get_all():
 @bp.route('/all_available', methods=['GET'])
 @login_required
 def get_all_available():
-    return jsonify(sensors=[s.as_dict() for s in
-                            Sensor.query.filter(Sensor.user_id == current_user.get_id() or Sensor.is_shared).all()])
+    return jsonify(sensors=[s.as_dict() for s in available_sensors()])
 
 
 @bp.route('/user/<int:user_id>', methods=['GET'])
@@ -122,3 +122,7 @@ def get_status_list():
 @login_required
 def get_sync_list():
     return jsonify(SyncType.as_dict())
+
+
+def available_sensors():
+    return Sensor.query.filter(or_(Sensor.user_id == current_user.get_id(), Sensor.is_shared)).all()

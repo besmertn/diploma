@@ -12,8 +12,10 @@
     <script src="{{ url_for('static', filename='accuweather.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='bootstrap-toggle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='datepicker.min.js') }}"></script>
     <script src="{{ url_for('static', filename='OverlayScrollbars.js') }}"></script>
     <script src="{{ url_for('static', filename='sensors.js') }}"></script>
+    <script src="{{ url_for('static', filename='statistic.js') }}"></script>
 
     {{ super() }}
 {% endblock %}
@@ -28,6 +30,7 @@
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-toggle.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='datepicker.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='OverlayScrollbars.css') }}">
 
 {% endblock %}

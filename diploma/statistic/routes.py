@@ -1,10 +1,11 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask import render_template, request, jsonify
 from flask_login import login_required
 
 from diploma import db
 from diploma.models import Record
+from diploma.sensor.routes import available_sensors
 from diploma.statistic import bp
 
 
@@ -32,7 +33,9 @@ def index():
         [17, 21, 19.59],
         [18, 11.78, 16]
     ]
-    # Record.query.filter_by(region_key=region_key)
+
+    date_range = {'from': datetime.today(), 'to': datetime.today() + timedelta(days=10)}
+    data = parse_data_by_date(date_range, Record.query.all())
     return render_template('statistic/index.html', title='Statistic', data=data)
 
 
@@ -60,3 +63,22 @@ def add_record():
     db.session.commit()
 
     return jsonify({'status': 'OK'})
+
+
+@bp.route('/<int:region_key>', methods=['GET'])
+def get_by_region(region_key):
+    sensor_id_list = {s.id for s in available_sensors() if s.region_key == region_key}
+    records = Record.query.filter(Record.sensor_id.in_(sensor_id_list)).all()
+    return jsonify(records=[r.as_dict() for r in records]), 200
+
+
+def parse_data_by_date(date_range, data):
+    filtered_data = {d for d in data if date_range['from'] <= d.timestamp <= date_range['to']}
+    filtered_data = list(filtered_data)
+    filtered_data.sort(key=lambda x: x.timestamp, reverse=False)
+    result = [['Day', 'PM10', 'PM2.5', 'Temperature', 'Humidity']]
+    for i in filtered_data:
+        result.append([str(i.timestamp), i.pm10, i.pm25, i.temperature, i.humidity])
+
+    print(result)
+    return result

@@ -230,8 +230,9 @@
                 markersArray.pop().setMap(null);
             }
             let regionData = await get_region_info(event.latLng.lat(), event.latLng.lng());
-            let sensors = await getSensorsByRegionKey(regionData['Key']);
-            let temperature = await get_1hour_forecast(regionData['Key']);
+            let regKey = regionData['Key'];
+            let sensors = await getSensorsByRegionKey(regKey);
+            let temperature = await get_1hour_forecast(regKey);
 
             let contentString = '<div id="content">' +
                 '<div id="siteNotice"></div>' +
@@ -241,7 +242,7 @@
                 '<div id="bodyContent"><p><b>Current Temperature in the Region: ' +
                 temperature['Value'] + ' ' + temperature['Unit'] + '</b></p>' +
                 '    <p></p>' +
-                '    <p><a href="#">See detailed statistic for this region...</a></p>' +
+                '    <p><a href="' + appConfig.basic_url + 'statistic/' + regKey + '">See detailed statistic for this region...</a></p>' +
                 '</div>' +
                 '</div>';
 

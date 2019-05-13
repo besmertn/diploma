@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from flask import render_template, request, jsonify
 from flask_login import login_required
@@ -12,30 +12,8 @@ from diploma.statistic import bp
 @bp.route('/')
 @login_required
 def index():
-    data = [
-        ['Day', 'PM10', 'PM2.5'],
-        [1, 10, 15],
-        [2, 12, 30],
-        [3, 25, 29],
-        [4, 13, 25],
-        [5, 17, 26],
-        [6, 11, 31],
-        [7, 10, 20],
-        [8, 12, 23.5],
-        [9, 11.5, 22],
-        [10, 18, 16],
-        [11, 11.9, 13],
-        [12, 19.1, 18.5],
-        [13, 12, 23.5],
-        [14, 13, 19.7],
-        [15, 15.1, 20],
-        [16, 14, 31.5],
-        [17, 21, 19.59],
-        [18, 11.78, 16]
-    ]
-
-    date_range = {'from': datetime.today(), 'to': datetime.today() + timedelta(days=10)}
-    data = parse_data_by_date(date_range, Record.query.all())
+    # date_range = {'from': datetime.today(), 'to': datetime.today() + timedelta(days=10)}
+    data = parse_data(Record.query.filter(Record.sensor_id.in_({s.id for s in available_sensors()})).all())
     return render_template('statistic/index.html', title='Statistic', data=data)
 
 
@@ -69,16 +47,28 @@ def add_record():
 def get_by_region(region_key):
     sensor_id_list = {s.id for s in available_sensors() if s.region_key == region_key}
     records = Record.query.filter(Record.sensor_id.in_(sensor_id_list)).all()
-    return jsonify(records=[r.as_dict() for r in records]), 200
+    return render_template('statistic/index.html', title='Statistic', data=parse_data(records))
 
 
-def parse_data_by_date(date_range, data):
-    filtered_data = {d for d in data if date_range['from'] <= d.timestamp <= date_range['to']}
-    filtered_data = list(filtered_data)
-    filtered_data.sort(key=lambda x: x.timestamp, reverse=False)
+@bp.route('/date', methods=['POST'])
+def get_by_date_range():
+    date_range = request.get_json()
+    if 'from' not in date_range or 'to' not in date_range:
+        return jsonify({'status': 'Failed', 'message': 'missing \'from\' or \'to\' value'}), 400
+
+    from_datetime = datetime.strptime(date_range['from'], '%m/%d/%y, %I:%M %p')
+    to_datetime = datetime.strptime(date_range['to'], '%m/%d/%y, %I:%M %p')
+
+    records = Record.query.filter(Record.sensor_id.in_({s.id for s in available_sensors()})).all()
+    filtered_records = {d for d in records if from_datetime <= d.timestamp <= to_datetime}
+    filtered_records = list(filtered_records)
+    return jsonify(data=parse_data(filtered_records)), 200
+
+
+def parse_data(data):
+    data.sort(key=lambda x: x.timestamp, reverse=False)
     result = [['Day', 'PM10', 'PM2.5', 'Temperature', 'Humidity']]
-    for i in filtered_data:
+    for i in data:
         result.append([str(i.timestamp), i.pm10, i.pm25, i.temperature, i.humidity])
 
-    print(result)
     return result

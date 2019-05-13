@@ -4,12 +4,14 @@
     {{ super() }}
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
-        let statisticData = {{ data|safe }};
-
-        for (let i = 1; i < statisticData.length; i++) {
-            statisticData[i][0] = new Date(statisticData[i][0]);
+        function set_dates() {
+            for (let i = 1; i < statisticData.length; i++) {
+                statisticData[i][0] = new Date(statisticData[i][0]);
+            }
         }
 
+        let statisticData = {{ data|safe }};
+        set_dates();
 
         google.charts.load('current', {'packages': ['line']});
         google.charts.setOnLoadCallback(function () {
@@ -43,39 +45,42 @@
         <div class="container options">
             <div class="datepicker-container">
                 <label class="form-check-label" for="fromDatepicker">
-                    From:
+                    {{ _('From:') }}
                 </label>
                 <input type='text' class='datepicker-here' data-timepicker="true" id="fromDatepicker"/>
 
                 <label class="form-check-label" for="toDatepicker">
-                    To:
+                    {{ _('To:') }}
                 </label>
                 <input type='text' class='datepicker-here' data-timepicker="true" id="toDatepicker"/>
-
+                <br/>
+                <input type="button" class="btn btn-secondary" value="{{ _('Search') }}" id="searchByDateButton">
             </div>
+
+
             <div class="checkbox-container">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="1" id="pm10CheckBox" checked>
                     <label class="form-check-label" for="pm10CheckBox">
-                        PM10
+                        {{ _('PM10') }}
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="2" id="pm25CheckBox" checked>
                     <label class="form-check-label" for="pm25CheckBox">
-                        PM2.5
+                        {{ _('PM2.5') }}
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="3" id="temperatureCheckBox" checked>
+                    <input class="form-check-input" type="checkbox" value="3" id="temperatureCheckBox">
                     <label class="form-check-label" for="temperatureCheckBox">
-                        Temperature
+                        {{ _('Temperature') }}
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="4" id="humidityCheckBox" checked>
+                    <input class="form-check-input" type="checkbox" value="4" id="humidityCheckBox">
                     <label class="form-check-label" for="humidityCheckBox">
-                        Humidity
+                        {{ _('Humidity') }}
                     </label>
                 </div>
             </div>

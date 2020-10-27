@@ -12,7 +12,7 @@ cffi==1.11.5
 chardet==3.0.4
 Click==7.0
 colorama==0.4.1
-cryptography==2.5
+cryptography==3.2
 dominate==2.3.5
 Flask==1.0.2
 Flask-Babel==0.12.2

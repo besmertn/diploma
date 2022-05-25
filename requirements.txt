@@ -42,7 +42,7 @@ pluggy==0.8.1
 psycopg2==2.7.7
 py==1.7.0
 pycparser==2.19
-PyJWT==1.7.1
+PyJWT==2.4.0
 pypiwin32==223
 pytest==4.2.0
 python-dateutil==2.7.5

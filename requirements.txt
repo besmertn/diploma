@@ -35,7 +35,7 @@ macholib==1.9
 Mako==1.0.7
 MarkupSafe==1.1.0
 more-itertools==6.0.0
-numpy==1.14.3
+numpy==1.22.0
 paho-mqtt==1.4.0
 pefile==2017.11.5
 pluggy==0.8.1
